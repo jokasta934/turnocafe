@@ -1,0 +1,8 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {isLate,isToday,nextNumber,validOrders,toCSV,escapeHTML} from '../dist/domain.js';
+const order={id:'a',number:23,client:'María',service:'Moler',instructions:'Fino',weight:10,status:'pending',due:'2026-11-01T16:00',createdAt:'2026-11-01T10:00:00Z'};
+test('un retiro vencido requiere atención hasta confirmar la entrega',()=>{const now=new Date('2026-11-01T17:00');assert.equal(isLate(order,now),true);assert.equal(isLate({...order,status:'ready'},now),true);assert.equal(isLate({...order,status:'delivered'},now),false);assert.equal(isToday(order,now),true);assert.equal(isLate(order,new Date('2026-11-01T15:00')),false);});
+test('números incluyen el historial y se valida el almacenamiento',()=>{assert.equal(nextNumber([]),1);assert.equal(nextNumber([order,{...order,number:29,status:'delivered'}]),30);assert.equal(validOrders([order]),true);assert.equal(validOrders([{...order,status:'missing'}]),false);assert.equal(validOrders([{...order,due:'bad date'}]),false);assert.equal(validOrders([{...order,number:1.5}]),false);assert.equal(validOrders([{...order,weight:-1}]),false);});
+test('CSV conserva comillas y líneas, y neutraliza fórmulas de clientes',()=>{const csv=toCSV([{...order,client:'=HYPERLINK("x")',instructions:'Grueso, no fino\nSaco "A"'}]);assert.ok(csv.startsWith('\uFEFF'));assert.ok(csv.includes('"\'=HYPERLINK(""x"")"'));assert.ok(csv.includes('"Grueso, no fino\nSaco ""A"""'));});
+test('contenido dictado se muestra como texto',()=>{assert.equal(escapeHTML('<img src=x onerror="alert(1)">'), '&lt;img src=x onerror=&quot;alert(1)&quot;&gt;');});
