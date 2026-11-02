@@ -8,3 +8,7 @@ node_modules/
 *.zip
 coverage/
 .openai/
+*.pem
+*.key
+*.p12
+*.pfx

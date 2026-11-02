@@ -6,7 +6,7 @@ Prototipo en desarrollo. [Abrir Turno Café](https://turno-cafe-tostaduria.weedy
 
 ## Abrir localmente
 
-Requisitos: Node.js 18 o superior para las pruebas y Python 3 para el servidor local.
+Requisitos: Node.js 24 LTS para las pruebas y Python 3 para el servidor local.
 
 ```sh
 git clone https://github.com/jokasta934/turnocafe.git
@@ -40,3 +40,7 @@ La siguiente fase requiere almacenamiento central con acceso por trabajador, ide
 - `tests/domain.test.js`: pruebas de datos y reglas del cuaderno.
 
 Los registros que se introducen en el navegador no forman parte del repositorio. Los pedidos incluidos en el modo de ejemplo son ficticios.
+
+## Seguridad
+
+Consulta [SECURITY.md](SECURITY.md) para los controles aplicados, sus límites y las comprobaciones antes de incorporar un servidor de pedidos. Ejecuta `npm run security` para revisar los patrones de secretos conocidos y el historial Git.
