@@ -6,7 +6,7 @@ Prototipo en desarrollo. [Abrir Turno Café](https://turno-cafe-tostaduria.weedy
 
 ## Abrir localmente
 
-Requisitos: Node.js 24 LTS para las pruebas y Python 3 para el servidor local.
+Requisitos: Node.js 24 LTS para las pruebas.
 
 ```sh
 git clone https://github.com/jokasta934/turnocafe.git
@@ -36,6 +36,7 @@ La siguiente fase requiere almacenamiento central con acceso por trabajador, ide
 - `dist/index.html`: pantallas y formulario de pedidos.
 - `dist/style.css`: diseño adaptable y modo televisor.
 - `dist/app.js`: interacción, dictado, guardado y flujo de trabajo.
+- `worker/index.js`: servidor de archivos permitidos, con encabezados de seguridad y métodos de solo lectura.
 - `dist/domain.js`: validación, estados y exportación CSV.
 - `tests/domain.test.js`: pruebas de datos y reglas del cuaderno.
 

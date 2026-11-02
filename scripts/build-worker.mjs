@@ -1,0 +1,12 @@
+import {readFileSync,writeFileSync,mkdirSync,existsSync} from 'node:fs';
+const assets={};
+for(const [file,type] of [['index.html','text/html; charset=utf-8'],['style.css','text/css; charset=utf-8'],['app.js','text/javascript; charset=utf-8'],['domain.js','text/javascript; charset=utf-8'],['dom.js','text/javascript; charset=utf-8']])assets['/'+file]={type,body:readFileSync('dist/'+file,'utf8')};
+const headers=Object.fromEntries(readFileSync('dist/_headers','utf8').split('\n').filter(line=>line.startsWith('  ')).map(line=>{const at=line.indexOf(':');return [line.slice(0,at).trim(),line.slice(at+1).trim()];}));
+mkdirSync('dist/server',{recursive:true});mkdirSync('dist/.openai',{recursive:true});
+writeFileSync('dist/server/index.js',readFileSync('worker/index.js','utf8')+'\nexport default createHandler('+JSON.stringify(assets)+','+JSON.stringify(headers)+');\n');
+const path='.openai/hosting.json';const manifest=existsSync(path)?JSON.parse(readFileSync(path,'utf8')):{};
+if(manifest.static)throw Error('Remove the obsolete static hosting configuration before building the server.');
+writeFileSync('dist/.openai/hosting.json',JSON.stringify(manifest,null,2)+'\n');
+const compiled=await import('data:text/javascript;base64,'+Buffer.from(readFileSync('dist/server/index.js')).toString('base64'));
+if(typeof compiled.default?.fetch!=='function')throw Error('Invalid server export');
+console.log('Built self-contained server with security headers.');

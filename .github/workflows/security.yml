@@ -19,5 +19,6 @@ jobs:
           cache: npm
       - run: npm ci --ignore-scripts
       - run: npm run check
+      - run: npm run build
       - run: npm run security
       - run: npm audit --audit-level=low

@@ -3,9 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "python3 -m http.server 4178 --bind 127.0.0.1 --directory dist",
-    "check": "node --check dist/app.js && node --check dist/dom.js && node --test tests/*.test.js",
-    "security": "node scripts/security-check.mjs --history"
+    "dev": "npm run build && node scripts/dev-server.mjs",
+    "check": "node --check dist/app.js && node --check dist/dom.js && node --check worker/index.js && node --test tests/*.test.js",
+    "security": "node scripts/security-check.mjs --history",
+    "build": "node scripts/build-worker.mjs"
   },
   "engines": {
     "node": ">=24 <25"

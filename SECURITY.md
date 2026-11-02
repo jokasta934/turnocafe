@@ -2,13 +2,13 @@
 
 ## Alcance actual
 
-Este es un prototipo estático privado. Los pedidos se guardan exclusivamente en el navegador. No hay API de pedidos, base de datos de servidor, formularios de contacto públicos, cuentas propias, contraseñas propias ni cookies creadas por la aplicación. La autenticación y sus cookies pertenecen al proveedor de alojamiento y se mantienen bajo su control. Un repositorio público no vuelve público el sitio privado ni los pedidos guardados en un navegador.
+Este es un prototipo privado con una capa de servidor que solo sirve archivos. Los pedidos se guardan exclusivamente en el navegador. El servidor rechaza métodos distintos de GET y HEAD con 405 y solo permite rutas explícitas. No hay API de pedidos, base de datos de servidor, formularios de contacto públicos, cuentas propias, contraseñas propias ni cookies creadas por la aplicación. La autenticación y sus cookies pertenecen al proveedor de alojamiento y se mantienen bajo su control. Un repositorio público no vuelve público el sitio privado ni los pedidos guardados en un navegador.
 
 ## Controles aplicados
 
 - Los datos variables se muestran mediante elementos DOM y `textContent`. No se interpretan nombres, instrucciones, dictados o registros guardados como HTML.
 - La política CSP en el documento limita scripts y estilos al mismo origen, bloquea código en línea, evaluación dinámica, objetos incrustados, conexiones de JavaScript y envíos de formularios de red. Las fuentes son locales al sistema: no se descargan recursos de terceros.
-- `dist/_headers` configura CSP, protección contra incrustación en marcos, HSTS, `nosniff`, política de referente y restricciones de funciones. Su aplicación HTTP debe comprobarse al desplegar en cada proveedor; la CSP del documento funciona como protección adicional, pero no sustituye los encabezados que solo pueden enviarse por HTTP.
+- `dist/_headers` define CSP, protección contra incrustación en marcos, HSTS, `nosniff`, política de referente y restricciones de funciones. El servidor los añade explícitamente a las respuestas de archivos, errores y métodos rechazados; su presencia se comprueba también tras publicar. La CSP del documento funciona como protección adicional.
 - Los registros se validan antes de cargar, guardar o recibir cambios de otra pestaña: tipos, tamaños, servicios permitidos, identificadores únicos, fechas, estados, peso y gramajes. Se rechazan claves de prototipo, registros duplicados y almacenamiento malformado o excesivo. Capacidad local: 2000 pedidos y 3 MB de JSON.
 - La confirmación impide guardados reentrantes; una edición abierta no sobrescribe silenciosamente un cambio recibido desde otra pestaña. El almacenamiento local no proporciona transacciones entre dispositivos.
 - Las exportaciones CSV neutralizan celdas que comienzan con operadores de fórmulas, incluso precedidos de espacios o saltos.
