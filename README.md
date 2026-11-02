@@ -38,6 +38,5 @@ La siguiente fase requiere almacenamiento central con acceso por trabajador, ide
 - `dist/app.js`: interacción, dictado, guardado y flujo de trabajo.
 - `dist/domain.js`: validación, estados y exportación CSV.
 - `tests/domain.test.js`: pruebas de datos y reglas del cuaderno.
-- `.openai/hosting.json`: identificación y configuración del sitio publicado; no contiene credenciales.
 
 Los registros que se introducen en el navegador no forman parte del repositorio. Los pedidos incluidos en el modo de ejemplo son ficticios.
