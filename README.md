@@ -8,9 +8,9 @@ Desde esta carpeta, ejecutar `npm run dev` y abrir http://127.0.0.1:4178. No req
 
 ## Incluye
 
-- Registro manual y dictado por la API de reconocimiento de voz del navegador, con revisión y confirmación obligatoria. El dictado se añade a instrucciones y sugiere servicio; cliente, kilos y retiro se revisan en campos explícitos.
-- Número de pedido, kilos recibidos opcionales, instrucciones y fecha/hora de retiro.
-- Pendiente → listo para pesar → entregado. Pesaje final, cálculo de precios y cobros se realizan fuera de este prototipo.
+- Registro manual y dictado por la API de reconocimiento de voz del navegador, con revisión y confirmación obligatoria. El dictado se añade a instrucciones; cliente, peso, servicios, empaque y retiro se revisan en campos explícitos.
+- Número de pedido, peso total recibido obligatorio, selección de varios servicios, tipo de tueste, molienda y empaque, instrucciones y fecha/hora de retiro.
+- Pendiente → listo para retirar → entregado. Pesaje final, cálculo de precios y cobros se realizan fuera de este prototipo.
 - Búsqueda, filtros, edición, historial y exportación CSV de todos los registros.
 - Modo televisor adaptable, alertas visuales con la página abierta y actualización entre pestañas del mismo navegador/origen.
 - Pedidos de ejemplo separados de los datos reales; el ejemplo no se guarda.
